@@ -3,6 +3,8 @@ ReadmeDoc
 
 Inline documentation tool that aggregates @readme annotated inline-documents to README.
 
+This tool is language diagnostic.
+
 ```objc
 /**
  *  @readme
@@ -18,7 +20,7 @@ Inline documentation tool that aggregates @readme annotated inline-documents to 
 @end
 ```
 
-Into
+Then following REAMDE is generated.
 
 ---
 
