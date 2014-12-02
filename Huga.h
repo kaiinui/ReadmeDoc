@@ -1,7 +1,7 @@
 /**
  *  @readme
  *
- *  Title
+ *  Hoga
  *  ---
  *
  *  It is foo bar.
@@ -14,7 +14,7 @@
 /**
  *  @readme
  *
- *  Title
+ *  Hoga
  *  ---
  *
  *  It is foo bar.
