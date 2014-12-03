@@ -1,17 +1,19 @@
 #!/usr/bin/ruby -w
 
-require_relative 'lib/readme_doc'
+require_relative '../lib/readme_doc'
 require 'slop'
 
 opts = Slop.parse help: true do
   banner 'Usage: readmedoc [options]'
 
-  on 'r', 'repo', 'Your GitHub repo path (For https://github.com/foo/bar, --repo=foo/bar)'
-  on 'i', 'include', 'Include pattern (e.g. .h)'
+  on 'r', 'repo=', 'Your GitHub repo path (For https://github.com/foo/bar, --repo=foo/bar)'
+  on 'i', 'include=', 'Include pattern (e.g. *.h)'
+  on 'e', 'exclude=', 'Exclude pattern (e.g. Pods)', as: Array
 end
 
 include_pattern = opts[:include]
 repo = opts[:repo]
+excludes = opts[:exclude]
 
 doc = ReadmeDoc.new
-puts doc.document_with_glob_pattern("**/*#{include_pattern}", repo)
+puts doc.document_with_glob_pattern("**/#{include_pattern}", excludes, repo)

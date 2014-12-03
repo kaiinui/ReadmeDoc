@@ -8,7 +8,8 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
   s.test_files = `git ls-files -- spec/*`.split("\n")
   s.license  = 'MIT'
+  s.executables << 'readmedoc'
 
   s.add_development_dependency 'rspec'
-  s.add_dependency 'slop'
+  s.add_runtime_dependency 'slop'
 end
