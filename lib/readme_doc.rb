@@ -1,10 +1,11 @@
 require 'rake/file_list'
+require_relative 'processor'
 
 class ReadmeDoc
-  # @param include_pattern String The pattern of Dir#glob
-  # @param exclude_pattern Array The patterns of Dir#glob
-  # @param repo String Repo path
-  # @return String
+  # @param include_pattern [String] The pattern of Dir#glob
+  # @param exclude_patterns [Array<String>] The patterns of Dir#glob
+  # @param repo [String] Repo path
+  # @return [String] documents
   def document_with_glob_pattern(include_pattern, exclude_patterns, repo)
     files_from_patterns(include_pattern, exclude_patterns).map { |filepath|
       next unless readme_annotated?(filepath)
@@ -12,7 +13,7 @@ class ReadmeDoc
       filename = filepath.split("/").last
       s = "## " + filename.split(".")[0] # Heading
       s += "\n\n"
-      s += readme_document_from_file(filepath) # Body
+      s += Processor.new.readme_document_from_file(filepath) # Body
       s += "\n"
       s += link_to_github(filename, repo) # Refer [URL]
       s += "\n\n"
@@ -38,37 +39,5 @@ class ReadmeDoc
 
   def link_to_github(filename, repo)
     "[Refer #{filename}](https://github.com/#{repo}/blob/master/#{filename})"
-  end
-
-  # @param str String
-  # @return Array
-  def readme_annotated_statements(str)
-    str.scan(/@readme([\s\S]*?)\/@readme/m).flatten
-  end
-
-  # @param str String
-  # @return String
-  def linefront_whitespace_eliminated_string(str)
-    str.gsub(/^\s*/m, "")
-  end
-
-  # @param str String
-  # @return String
-  def linefront_comment_symbol_eliminated_string(str)
-    str.gsub(/^\**/m, "")
-  end
-
-  # Returns @readme annotated statement from a file that specified by given filename.
-  #
-  # @param filename String The name of file
-  # @return String
-  def readme_document_from_file(filename)
-    body = File.open(filename).read
-    statements = readme_annotated_statements(body)
-    statements.map { |s|
-      no_white = linefront_whitespace_eliminated_string(s)
-      no_comment = linefront_comment_symbol_eliminated_string(no_white)
-      linefront_whitespace_eliminated_string(no_comment)
-    }.join("\n")
   end
 end
