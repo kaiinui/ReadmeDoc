@@ -6,13 +6,12 @@ Inline documentation tool that aggregates @readme annotated inline-documents to 
 This tool is language diagnostic.
 
 ```objc
+// HogeClass.h
+
 /**
  *  @readme
  *
- *  Title
- *  ---
- *
- *  It is foo bar.
+ *  This class provides awesome features.
  *
  *  /@readme
  */
@@ -24,7 +23,9 @@ Then following REAMDE is generated.
 
 ---
 
-Title
+- [HogeClass](#hogeclass)
+
+HogeClass
 ---
 
-It is foo bar.
+This class provides awesome features.
