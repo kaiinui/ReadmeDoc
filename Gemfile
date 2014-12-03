@@ -1,1 +1,3 @@
+gem "slop"
 gem "rspec"
+

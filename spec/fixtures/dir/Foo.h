@@ -1,9 +1,6 @@
 /**
  *  @readme
  *
- *  Title
- *  ---
- *
  *  It is foo bar.
  *
  *  /@readme
@@ -13,9 +10,6 @@
 
 /**
  *  @readme
- *
- *  Title
- *  ---
  *
  *  It is foo bar.
  *

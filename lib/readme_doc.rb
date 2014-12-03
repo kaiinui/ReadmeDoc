@@ -1,14 +1,24 @@
 class ReadmeDoc
   # @param pattern String The pattern of Dir#glob
+  # @param repo String Repo path
   # @return String
-  def document_with_glob_pattern(pattern)
+  def document_with_glob_pattern(pattern, repo)
     puts Dir.glob("**/*.h").map { |filename|
-      s = 
+      s = "## " + filename.split("/").last.split(".")[0]
+      s += "\n\n"
       s += readme_document_from_file(filename)
+      s += "\n"
+      s += link_to_github(filename, repo)
+      s += "\n"
+      s
     }.join("\n")
   end
 
   private
+
+  def link_to_github(filename, repo)
+    "[Refer #{filename}](https://github.com/#{repo}/blob/master/#{filename}#L23)"
+  end
 
   # @param str String
   # @return Array
