@@ -15,7 +15,7 @@ class ReadmeDoc
       s += "\n\n"
       s += Processor.new.readme_document_from_file(filepath) # Body
       s += "\n"
-      s += link_to_github(filename, repo) # Refer [URL]
+      s += link_to_github(filepath, repo) # Refer [URL]
       s += "\n\n"
       s
     }.join()
@@ -37,7 +37,9 @@ class ReadmeDoc
     File.open(filepath).read.include?("@readme")
   end
 
-  def link_to_github(filename, repo)
-    "[Refer #{filename}](https://github.com/#{repo}/blob/master/#{filename})"
+  def link_to_github(filepath, repo)
+    filename = filepath.split("/").last
+
+    "[Refer #{filename}](https://github.com/#{repo}/blob/master/#{filepath})"
   end
 end
